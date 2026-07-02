@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anamnese digital — Dr. Cussioli</title>
+<title>Anamnese digital — Dr. Cussioli · Mentoria</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,13 +62,13 @@
   .f>label,.f>.lbl{display:block;font-weight:600;font-size:.94rem;margin-bottom:6px}
   .f .hint{display:block;font-weight:400;font-size:.8rem;color:var(--muted);margin:-2px 0 8px}
 
-  input[type=text],input[type=tel],textarea,select{
+  input[type=text],textarea{
     width:100%;font:inherit;font-size:.95rem;color:var(--ink);
     border:1px solid var(--line);border-radius:9px;background:var(--mint-soft);
     padding:11px 12px;
   }
   textarea{min-height:74px;resize:vertical}
-  input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  input:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
   ::placeholder{color:#8FA9A3}
 
   .opts{display:flex;flex-wrap:wrap;gap:8px}
@@ -81,7 +81,6 @@
   .opt input:checked+span{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
   .opt input:focus-visible+span{outline:2px solid var(--teal);outline-offset:2px}
 
-  /* prints */
   .drop{
     border:2px dashed #A9CEC3;border-radius:14px;background:var(--card);
     padding:26px 18px;text-align:center;cursor:pointer;
@@ -120,23 +119,23 @@
 <div class="wrap">
 
   <header>
-    <span class="eyebrow">Dr. Cussioli · anamnese digital</span>
-    <h1>Hoje quem senta na cadeira <em>é você, doutor.</em></h1>
+    <span class="eyebrow">Dr. Cussioli · anamnese digital · mentoria</span>
+    <h1>Agora o paciente <em>é o seu curso.</em></h1>
     <p class="lead">
-      Antes de começarmos os anúncios do seu perfil profissional, preciso conhecer
-      seu trabalho — igual você faz com paciente novo. São 6 blocos rápidos, a maioria é só tocar na opção.
-      <small>Leva ~10 minutos. Responda o que souber — o que ficar em branco a gente vê na call.
-      Suas respostas ficam salvas neste aparelho até você enviar.</small>
+      A nossa call já adiantou muita coisa — este form fecha o que falta pra eu montar
+      os anúncios, o Business Manager e a landing page. A maioria é só tocar na opção.
+      <small>Leva ~8 minutos. Responda o que souber; suas respostas ficam salvas neste
+      aparelho até você enviar.</small>
     </p>
   </header>
 
   <div class="tabs" role="tablist">
     <button type="button" class="tab on" id="tab-q" role="tab" aria-selected="true">Perguntas</button>
-    <button type="button" class="tab" id="tab-p" role="tab" aria-selected="false">Prints 📎</button>
+    <button type="button" class="tab" id="tab-p" role="tab" aria-selected="false">Prints e fotos 📎</button>
   </div>
 
   <form action="https://formsubmit.co/pedrobgbmattos12@gmail.com" method="POST" enctype="multipart/form-data" id="form">
-    <input type="hidden" name="_subject" value="Anamnese — Dr. Cussioli">
+    <input type="hidden" name="_subject" value="Anamnese Mentoria — Dr. Cussioli">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_next" value="https://pedrobmattos.github.io/cussioli-anamnese/obrigado.html">
     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -144,199 +143,166 @@
     <div class="panel on" id="panel-q">
 
       <fieldset>
-        <legend><span class="k">A</span> Seu consultório hoje</legend>
+        <legend><span class="k">A</span> A mentoria (o produto)</legend>
         <div class="f">
-          <span class="lbl">Quais procedimentos você mais quer vender?</span>
-          <span class="hint">Pode marcar vários — isso define por onde os anúncios começam</span>
+          <label for="a1">Nome oficial da mentoria/imersão</label>
+          <span class="hint">Na call apareceu "SoftSkill" — confirma a grafia certinha como deve aparecer nos anúncios</span>
+          <input type="text" id="a1" name="A1 nome da mentoria" placeholder="ex.: Mentoria SoftSkill">
+        </div>
+        <div class="f">
+          <label for="a2">O que ela ensina, em 1-2 frases?</label>
+          <span class="hint">Como você explicaria pro dentista no direct — técnica, tema, resultado</span>
+          <textarea id="a2" name="A2 o que ensina" placeholder="escreva aqui"></textarea>
+        </div>
+        <div class="f">
+          <span class="lbl">Formato</span>
           <div class="opts">
-            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Implantes"><span>Implantes</span></label>
-            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Lentes/facetas"><span>Lentes / facetas</span></label>
-            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Clareamento"><span>Clareamento</span></label>
-            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Alinhador/orto"><span>Alinhador / orto</span></label>
-            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Clinico geral"><span>Clínico geral</span></label>
-            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Urgencias"><span>Urgências</span></label>
+            <label class="opt"><input type="radio" name="A3 formato" value="Presencial" checked><span>Presencial</span></label>
+            <label class="opt"><input type="radio" name="A3 formato" value="Online"><span>Online</span></label>
+            <label class="opt"><input type="radio" name="A3 formato" value="Hibrido"><span>Híbrido</span></label>
           </div>
-          <input type="text" name="A1 outro procedimento" placeholder="outro? escreva aqui" style="margin-top:8px">
+          <input type="text" name="A3 onde acontece" placeholder="onde acontece? (cidade, consultório, centro de cursos…)" style="margin-top:8px">
         </div>
         <div class="f">
-          <label for="a2">Valor médio dos principais procedimentos</label>
-          <span class="hint">Aproximado já ajuda — ex.: implante R$ 3.500, clareamento R$ 800…</span>
-          <textarea id="a2" name="A2 ticket medio" placeholder="escreva aqui"></textarea>
+          <label for="a4">Próxima turma / data prevista</label>
+          <input type="text" id="a4" name="A4 proxima turma" placeholder="ex.: agosto/2026, ainda vou definir…">
         </div>
         <div class="f">
-          <label for="a3">Quantos pacientes novos por mês cabem na agenda? Quais dias/horários ficam vazios?</label>
-          <textarea id="a3" name="A3 capacidade agenda" placeholder="ex.: uns 20 por mês; terça e quinta à tarde são fracas"></textarea>
+          <label for="a5">Valor da inscrição (ou faixa) e vagas por turma</label>
+          <span class="hint">Fica só entre nós — preciso pra calcular quanto pode custar cada interessado</span>
+          <input type="text" id="a5" name="A5 preco e vagas" placeholder="ex.: R$ 2.500 · 10 vagas">
         </div>
         <div class="f">
-          <label for="a4">De quais bairros/cidades vêm seus pacientes?</label>
-          <input type="text" id="a4" name="A4 regiao" placeholder="ex.: centro, Jardim X, cidades vizinhas…">
+          <label for="a6">O que o aluno leva?</label>
+          <span class="hint">Hands-on, certificado, material, acompanhamento… — vira argumento da landing page</span>
+          <textarea id="a6" name="A6 o que inclui" placeholder="escreva aqui"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">B</span> O público (dentistas)</legend>
+        <div class="f">
+          <label for="b7">Quais cidades/região quer alcançar?</label>
+          <span class="hint">Na call: "dentistas da minha região" — me diz as cidades ou o raio em km</span>
+          <input type="text" id="b7" name="B7 cidades alvo" placeholder="ex.: Ribeirão Preto + 100km, ou lista de cidades">
         </div>
         <div class="f">
-          <span class="lbl">Atende convênio ou só particular?</span>
+          <span class="lbl">Nível do dentista que você quer atrair</span>
+          <span class="hint">Na call: "de estudante até véio" — confirma</span>
           <div class="opts">
-            <label class="opt"><input type="radio" name="A5 convenio" value="So particular"><span>Só particular</span></label>
-            <label class="opt"><input type="radio" name="A5 convenio" value="Particular + convenio"><span>Particular + convênio</span></label>
-            <label class="opt"><input type="radio" name="A5 convenio" value="Maioria convenio"><span>Maioria convênio</span></label>
+            <label class="opt"><input type="checkbox" name="B8 nivel" value="Estudante"><span>Estudante</span></label>
+            <label class="opt"><input type="checkbox" name="B8 nivel" value="Recem-formado"><span>Recém-formado</span></label>
+            <label class="opt"><input type="checkbox" name="B8 nivel" value="Experiente"><span>Experiente</span></label>
+            <label class="opt"><input type="checkbox" name="B8 nivel" value="Todos" checked><span>Todos</span></label>
           </div>
-          <input type="text" name="A5 perfil paciente" placeholder="como é o paciente típico? (idade, perfil)" style="margin-top:8px">
         </div>
         <div class="f">
-          <span class="lbl">Atende urgência (dor, dente quebrado)?</span>
+          <span class="lbl">Nicho/tema que mais conversa com a mentoria</span>
           <div class="opts">
-            <label class="opt"><input type="radio" name="A6 urgencia" value="Sim"><span>Sim</span></label>
-            <label class="opt"><input type="radio" name="A6 urgencia" value="As vezes"><span>Às vezes</span></label>
-            <label class="opt"><input type="radio" name="A6 urgencia" value="Nao"><span>Não</span></label>
+            <label class="opt"><input type="checkbox" name="B9 nicho" value="Dentistica/resina"><span>Dentística / resina</span></label>
+            <label class="opt"><input type="checkbox" name="B9 nicho" value="Estetica/lentes"><span>Estética / lentes</span></label>
+            <label class="opt"><input type="checkbox" name="B9 nicho" value="Fotografia odonto"><span>Fotografia odonto</span></label>
+            <label class="opt"><input type="checkbox" name="B9 nicho" value="Gestao/carreira"><span>Gestão / carreira</span></label>
+          </div>
+          <input type="text" name="B9 outro nicho" placeholder="outro? escreva aqui" style="margin-top:8px">
+        </div>
+        <div class="f">
+          <label for="b10">Qual a maior dor desse dentista que a mentoria resolve?</label>
+          <span class="hint">É daqui que sai o texto do anúncio</span>
+          <textarea id="b10" name="B10 dor do publico" placeholder="ex.: não domina a técnica X, perde caso pro concorrente, insegurança em…"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">C</span> Conteúdo e criativos</legend>
+        <div class="f">
+          <label for="c11">Posts existentes liberados pra virar anúncio</label>
+          <span class="hint">Na call: o carrossel do case ("rosinha") + o vídeo institucional. Cola os links deles aqui e adiciona outros se tiver</span>
+          <textarea id="c11" name="C11 posts liberados" placeholder="cole os links dos posts"></textarea>
+        </div>
+        <div class="f">
+          <span class="lbl">Vai gravar vídeos novos?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="C12 videos novos" value="Sim, toda semana"><span>Sim, toda semana</span></label>
+            <label class="opt"><input type="radio" name="C12 videos novos" value="Sim, as vezes"><span>Sim, às vezes</span></label>
+            <label class="opt"><input type="radio" name="C12 videos novos" value="Prefiro usar o que ja tenho"><span>Usar o que já tenho</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">Tem material de turmas anteriores?</span>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="C13 material turmas" value="Fotos de turma"><span>Fotos de turma</span></label>
+            <label class="opt"><input type="checkbox" name="C13 material turmas" value="Videos"><span>Vídeos</span></label>
+            <label class="opt"><input type="checkbox" name="C13 material turmas" value="Depoimentos de alunos"><span>Depoimentos de alunos</span></label>
+            <label class="opt"><input type="checkbox" name="C13 material turmas" value="Primeira turma ainda"><span>Vai ser a 1ª turma</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <label for="c14">Casos clínicos que aparecem nos anúncios: têm autorização do paciente?</label>
+          <span class="hint">Pra usar imagem de caso em anúncio, o ideal é autorização por escrito — me diz como está isso</span>
+          <input type="text" id="c14" name="C14 autorizacao casos" placeholder="ex.: tenho autorização dos casos que posto / preciso organizar">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">D</span> Contas e acessos</legend>
+        <div class="f">
+          <label for="d15">@ do seu perfil pessoal</label>
+          <input type="text" id="d15" name="D15 arroba perfil" placeholder="@…">
+        </div>
+        <div class="f">
+          <label for="d16">E-mail e celular ligados à sua conta Meta/Instagram</label>
+          <span class="hint">Pra eu criar o Business Manager certinho (na call: você nunca configurou — eu configuro)</span>
+          <input type="text" id="d16" name="D16 email e celular conta" placeholder="e-mail · celular">
+        </div>
+        <div class="f">
+          <span class="lbl">Seu perfil pessoal já é conta profissional (criador/business)?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="D17 conta profissional" value="Sim"><span>Sim</span></label>
+            <label class="opt"><input type="radio" name="D17 conta profissional" value="Nao"><span>Não</span></label>
+            <label class="opt"><input type="radio" name="D17 conta profissional" value="Nao sei"><span>Não sei</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">Cartão que vai pagar os R$ 300/mês do Meta</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="D18 cartao" value="Meu pessoal"><span>Meu pessoal</span></label>
+            <label class="opt"><input type="radio" name="D18 cartao" value="A definir"><span>A definir</span></label>
           </div>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend><span class="k">B</span> Presença digital</legend>
+        <legend><span class="k">E</span> O funil (do clique à inscrição)</legend>
         <div class="f">
-          <span class="lbl">Tem site ou página profissional sua?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="B7 site" value="Tem"><span>Tem</span></label>
-            <label class="opt"><input type="radio" name="B7 site" value="Nao tem"><span>Não tem</span></label>
-            <label class="opt"><input type="radio" name="B7 site" value="Nao sei"><span>Não sei</span></label>
-          </div>
-          <input type="text" name="B7 site url" placeholder="se tem: endereço do site e quem tem a senha" style="margin-top:8px">
+          <label for="e19">WhatsApp que recebe os interessados</label>
+          <input type="text" id="e19" name="E19 whatsapp" placeholder="número">
         </div>
         <div class="f">
-          <span class="lbl">Seu perfil no Google Maps (seu ou do consultório) é reivindicado?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="B8 google maps" value="Sim"><span>Sim</span></label>
-            <label class="opt"><input type="radio" name="B8 google maps" value="Nao"><span>Não</span></label>
-            <label class="opt"><input type="radio" name="B8 google maps" value="Nao sei"><span>Não sei</span></label>
-          </div>
-          <input type="text" name="B8 avaliacoes" placeholder="tem ideia de quantas avaliações tem?" style="margin-top:8px">
+          <label for="e20">Quem responde o direct/WhatsApp e em quanto tempo?</label>
+          <input type="text" id="e20" name="E20 quem responde" placeholder="ex.: eu mesmo, entre atendimentos…">
         </div>
         <div class="f">
-          <label for="b9">Seu Instagram profissional: qual é o @ e quem posta?</label>
-          <input type="text" id="b9" name="B9 instagram" placeholder="@drcussioli — posta quem?">
+          <label for="e21">O que NÃO pode faltar na landing page?</label>
+          <span class="hint">Você vai me mandar a página modelo — aqui é só o que você faz questão que apareça</span>
+          <textarea id="e21" name="E21 landing page" placeholder="ex.: meus cases, formato do curso, quem sou eu…"></textarea>
         </div>
         <div class="f">
-          <span class="lbl">Já investiu em anúncio pago antes?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="B10 trafego antes" value="Sim"><span>Sim</span></label>
-            <label class="opt"><input type="radio" name="B10 trafego antes" value="Nao"><span>Não</span></label>
-          </div>
-          <textarea name="B10 detalhes" placeholder="se sim: com quem, quanto por mês, o que achou do resultado?" style="margin-top:8px"></textarea>
-        </div>
-        <div class="f">
-          <span class="lbl">O que você já tem de material?</span>
-          <div class="opts">
-            <label class="opt"><input type="checkbox" name="B11 material" value="Fotos do consultorio"><span>Fotos do consultório</span></label>
-            <label class="opt"><input type="checkbox" name="B11 material" value="Fotos suas atendendo"><span>Fotos suas atendendo</span></label>
-            <label class="opt"><input type="checkbox" name="B11 material" value="Videos"><span>Vídeos</span></label>
-            <label class="opt"><input type="checkbox" name="B11 material" value="Depoimentos"><span>Depoimentos</span></label>
-            <label class="opt"><input type="checkbox" name="B11 material" value="Nada ainda"><span>Nada ainda</span></label>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span class="k">C</span> Investimento</legend>
-        <div class="f">
-          <span class="lbl">Quanto topa investir em anúncio por mês, por 60 dias?</span>
-          <span class="hint">O 1º mês é calibragem — o sistema aprende o que funciona na sua região</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="C12 orcamento" value="Ate R$900"><span>Até R$ 900</span></label>
-            <label class="opt"><input type="radio" name="C12 orcamento" value="R$900-1500"><span>R$ 900–1.500</span></label>
-            <label class="opt"><input type="radio" name="C12 orcamento" value="R$1500-2500"><span>R$ 1.500–2.500</span></label>
-            <label class="opt"><input type="radio" name="C12 orcamento" value="Mais de R$2500"><span>R$ 2.500+</span></label>
-            <label class="opt"><input type="radio" name="C12 orcamento" value="Quero conversar"><span>Quero conversar</span></label>
-          </div>
-        </div>
-        <div class="f">
-          <span class="lbl">A cobrança do Google/Meta fica no cartão de quem?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="C13 cartao" value="Meu pessoal"><span>Meu pessoal</span></label>
-            <label class="opt"><input type="radio" name="C13 cartao" value="Do consultorio"><span>Do consultório</span></label>
-            <label class="opt"><input type="radio" name="C13 cartao" value="A definir"><span>A definir</span></label>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span class="k">D</span> Atendimento</legend>
-        <div class="f">
-          <label for="d15">Quem responde o WhatsApp que seus pacientes usam hoje?</label>
-          <input type="text" id="d15" name="D15 quem responde" placeholder="ex.: a secretária Maria, eu mesmo…">
-          <span class="lbl" style="margin-top:12px">Em quanto tempo costuma responder, de verdade?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Menos de 5 min"><span>&lt; 5 min</span></label>
-            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Ate 1 hora"><span>Até 1h</span></label>
-            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Algumas horas"><span>Algumas horas</span></label>
-            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Depende do dia"><span>Depende</span></label>
-          </div>
-        </div>
-        <div class="f">
-          <span class="lbl">Quando os anúncios rodarem: topa responder em até 5 minutos no horário comercial?</span>
-          <span class="hint">Contato que espera esfria — é o que mais derruba o resultado</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="D16 sla" value="Topo"><span>Topo</span></label>
-            <label class="opt"><input type="radio" name="D16 sla" value="Preciso organizar"><span>Preciso organizar</span></label>
-            <label class="opt"><input type="radio" name="D16 sla" value="Dificil"><span>Vai ser difícil</span></label>
-          </div>
-        </div>
-        <div class="f">
-          <span class="lbl">Como funciona a agenda?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="D17 agenda" value="Papel"><span>Papel</span></label>
-            <label class="opt"><input type="radio" name="D17 agenda" value="Planilha"><span>Planilha</span></label>
-            <label class="opt"><input type="radio" name="D17 agenda" value="Software"><span>Software</span></label>
-          </div>
-          <input type="text" name="D17 qual software" placeholder="se software: qual?" style="margin-top:8px">
-        </div>
-        <div class="f">
-          <label for="d18">O que acontece com quem chama à noite ou no fim de semana?</label>
-          <input type="text" id="d18" name="D18 fora do horario" placeholder="ex.: fica sem resposta até segunda…">
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span class="k">E</span> Regras e imagem</legend>
-        <div class="f">
-          <label for="e19">Seu CRO e o nome profissional que assina os anúncios</label>
-          <span class="hint">Precisam aparecer em toda peça de publicidade — regra do CFO</span>
-          <input type="text" id="e19" name="E19 cro e nome profissional" placeholder="Dr. … · CRO-SP 00000">
-        </div>
-        <div class="f">
-          <span class="lbl">Fotos de antes e depois: você tem autorização por escrito dos pacientes?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="E20 autorizacoes" value="Tenho escritas"><span>Tenho, por escrito</span></label>
-            <label class="opt"><input type="radio" name="E20 autorizacoes" value="Tenho fotos sem autorizacao"><span>Tenho fotos, sem autorização</span></label>
-            <label class="opt"><input type="radio" name="E20 autorizacoes" value="Nao tenho"><span>Não tenho</span></label>
-          </div>
-        </div>
-        <div class="f">
-          <span class="lbl">Topa aparecer nos anúncios (rosto, nome, CRO)?</span>
-          <span class="hint">Dentista de verdade converte mais que foto de banco de imagem</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="E21 aparecer" value="Sim"><span>Sim</span></label>
-            <label class="opt"><input type="radio" name="E21 aparecer" value="Talvez"><span>Talvez</span></label>
-            <label class="opt"><input type="radio" name="E21 aparecer" value="Prefiro nao"><span>Prefiro não</span></label>
-          </div>
-        </div>
-        <div class="f">
-          <span class="lbl">Quer divulgar preço ou condição de pagamento nos anúncios?</span>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="E22 preco" value="Sim"><span>Sim</span></label>
-            <label class="opt"><input type="radio" name="E22 preco" value="Talvez"><span>Talvez</span></label>
-            <label class="opt"><input type="radio" name="E22 preco" value="Nao"><span>Não</span></label>
-          </div>
+          <label for="e22">Alguma referência que você acha top?</label>
+          <span class="hint">Perfil de mentor, landing page de curso, anúncio que te fisgou — cola os links</span>
+          <textarea id="e22" name="E22 referencias" placeholder="links"></textarea>
         </div>
       </fieldset>
 
       <fieldset>
         <legend><span class="k">F</span> Sucesso</legend>
         <div class="f">
-          <label for="f23">Pra você, o que é sucesso em 60 dias?</label>
-          <span class="hint">Ex.: "8 pacientes novos por mês" — vira a meta oficial que a gente acompanha</span>
+          <label for="f23">Com R$ 300/mês de teste: o que te deixa feliz em 60 dias?</label>
+          <span class="hint">Ex.: +X seguidores dentistas, X conversas no direct, 1ª inscrição na mentoria — vira a meta do painel</span>
           <textarea id="f23" name="F23 sucesso 60 dias" placeholder="escreva com suas palavras"></textarea>
         </div>
         <div class="f">
-          <label for="obs">Quer deixar alguma pergunta ou recado pro Pedro?</label>
+          <label for="obs">Pergunta ou recado pro Pedro?</label>
           <textarea id="obs" name="Recado" placeholder="opcional"></textarea>
         </div>
       </fieldset>
@@ -345,11 +311,10 @@
 
     <div class="panel" id="panel-p">
       <fieldset>
-        <legend><span class="k">📎</span> Prints que ajudam muito</legend>
+        <legend><span class="k">📎</span> Prints e fotos que ajudam muito</legend>
         <div class="f" style="border-top:0">
           <span class="hint" style="margin-top:2px">
-            Tire print no celular ou no computador e anexe aqui. Se algum arquivo for
-            grande demais, sem estresse: manda no WhatsApp do Pedro.
+            Anexe aqui prints e fotos. Arquivo grande demais? Sem estresse: manda no WhatsApp do Pedro.
           </span>
           <label class="drop" id="drop">
             <strong>Toque para escolher os arquivos</strong>
@@ -359,11 +324,11 @@
           <ul class="filelist" id="filelist"></ul>
           <div class="sizewarn" id="sizewarn">⚠️ Os arquivos passam de 10MB — o envio pode falhar. Tire alguns e mande o resto pelo WhatsApp.</div>
           <ul class="printtips">
-            <li>Seu perfil no <strong>Google Maps</strong> (como aparece pra você)</li>
-            <li>Seu <strong>Instagram</strong> profissional</li>
-            <li><strong>Site</strong>, se tiver</li>
-            <li>Resultados de <strong>anúncios antigos</strong> ou relatório de agência anterior</li>
-            <li>Tela da <strong>agenda/software</strong> que usa hoje</li>
+            <li>Print do <strong>seu perfil pessoal</strong> (a grade, como aparece)</li>
+            <li>Print do <strong>carrossel do case</strong> ("rosinha") e do <strong>vídeo institucional</strong></li>
+            <li><strong>Fotos de turma / bastidores</strong> da mentoria, se tiver</li>
+            <li>Logo ou <strong>identidade visual</strong> que você já use (cores, fonte)</li>
+            <li>Material da <strong>página modelo</strong> que você está montando (pode vir aqui também)</li>
           </ul>
         </div>
       </fieldset>
@@ -380,7 +345,6 @@
 
 <script>
 (function(){
-  // abas
   var tq=document.getElementById('tab-q'),tp=document.getElementById('tab-p');
   var pq=document.getElementById('panel-q'),pp=document.getElementById('panel-p');
   function tab(which){
@@ -393,8 +357,7 @@
   tq.addEventListener('click',function(){tab('q')});
   tp.addEventListener('click',function(){tab('p')});
 
-  // rascunho automático
-  var KEY='cussioli-anamnese-draft';
+  var KEY='cussioli-mentoria-draft';
   var form=document.getElementById('form');
   var fields=[].slice.call(form.querySelectorAll('input[type=text],textarea,input[type=radio],input[type=checkbox]'))
     .filter(function(el){return el.name!=='_honey'});
@@ -421,7 +384,6 @@
     el.addEventListener(el.type==='radio'||el.type==='checkbox'?'change':'input',save);
   });
 
-  // prints
   var input=document.getElementById('prints');
   var drop=document.getElementById('drop');
   var list=document.getElementById('filelist');
@@ -453,7 +415,6 @@
     }
   });
 
-  // envio
   form.addEventListener('submit',function(){
     var b=document.getElementById('send');
     b.disabled=true;b.textContent='Enviando…';

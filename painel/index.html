@@ -105,7 +105,7 @@
 
   <div class="topbar">
     <div class="brand">
-      <span class="eyebrow">painel de tráfego · instagram</span>
+      <span class="eyebrow">painel de tráfego · instagram · perfil pessoal</span>
       <h1>Dr. Cussioli</h1>
     </div>
     <span class="demo">demo · dados de exemplo</span>
@@ -120,8 +120,8 @@
 
   <div class="row">
     <div class="card">
-      <h2>Conversas no WhatsApp por dia</h2>
-      <span class="note">cada conversa é um paciente em potencial que chamou pelo anúncio</span>
+      <h2>Novos seguidores por dia</h2>
+      <span class="note">dentistas que passaram a te seguir vindos do anúncio</span>
       <div id="chartConv"></div>
     </div>
     <div class="card">
@@ -133,7 +133,7 @@
 
   <div class="row">
     <div class="card funnel">
-      <h2>Do anúncio ao agendamento</h2>
+      <h2>Do anúncio ao interessado</h2>
       <span class="note">o caminho completo no período selecionado</span>
       <div id="funnel"></div>
     </div>
@@ -141,28 +141,28 @@
       <h2>Por criativo (anúncio)</h2>
       <span class="note">onde cada real está performando melhor — últimos 30 dias</span>
       <table>
-        <thead><tr><th>Criativo</th><th class="num">Investido</th><th class="num">Conversas</th><th>Custo por conversa</th><th>Status</th></tr></thead>
+        <thead><tr><th>Criativo</th><th class="num">Investido</th><th class="num">Seguidores</th><th>Custo por seguidor</th><th>Status</th></tr></thead>
         <tbody>
           <tr>
-            <td>Lentes — antes &amp; depois</td>
-            <td class="num">R$ 280</td>
-            <td class="num">14</td>
-            <td><span class="cbar" style="width:52px"></span><span class="mono" style="font-size:.8rem">R$ 20,00</span></td>
+            <td>Vídeo institucional</td>
+            <td class="num">R$ 132</td>
+            <td class="num">86</td>
+            <td><span class="cbar" style="width:50px"></span><span class="mono" style="font-size:.8rem">R$ 1,53</span></td>
             <td><span class="chip on">● ativo</span></td>
           </tr>
           <tr>
-            <td>Clareamento — vídeo</td>
-            <td class="num">R$ 210</td>
-            <td class="num">9</td>
-            <td><span class="cbar" style="width:61px"></span><span class="mono" style="font-size:.8rem">R$ 23,30</span></td>
+            <td>Case clínico — carrossel</td>
+            <td class="num">R$ 118</td>
+            <td class="num">85</td>
+            <td><span class="cbar" style="width:46px"></span><span class="mono" style="font-size:.8rem">R$ 1,39</span></td>
             <td><span class="chip on">● ativo</span></td>
           </tr>
           <tr>
-            <td>Avaliação — 1ª consulta</td>
-            <td class="num">R$ 130</td>
-            <td class="num">4</td>
-            <td><span class="cbar" style="width:85px"></span><span class="mono" style="font-size:.8rem">R$ 32,50</span></td>
-            <td><span class="chip test">◐ em teste</span></td>
+            <td>Oferta da mentoria</td>
+            <td class="num">—</td>
+            <td class="num">—</td>
+            <td><span class="mono" style="font-size:.8rem">—</span></td>
+            <td><span class="chip test">◐ aguarda landing page</span></td>
           </tr>
         </tbody>
       </table>
@@ -172,12 +172,12 @@
   <div class="leitura">
     <h2>Leitura do Pedro — esta semana</h2>
     <p id="leituraTxt">
-      O anúncio de lentes com antes &amp; depois é o campeão: traz conversa a R$ 20 — bem
-      abaixo da meta de R$ 40. O de avaliação está caro e, se não melhorar até sexta,
-      o sistema vai propor pausar. Nenhuma anomalia de gasto no período.
+      O vídeo institucional e o case clínico estão trazendo seguidor dentista a ~R$ 1,50 —
+      dentro da meta de R$ 3. O anúncio da oferta entra assim que a landing page da mentoria
+      ficar pronta. Nenhuma anomalia de gasto no período.
     </p>
     <div class="guards">
-      <span class="guard">teto do mês <b>R$ 1.240 / R$ 1.500</b></span>
+      <span class="guard">teto do mês <b>R$ 140 / R$ 300</b></span>
       <span class="guard">travas de gasto <b>✓ ativas</b></span>
       <span class="guard">vigia · último check <b>hoje 15:40 ✓</b></span>
       <span class="guard">aprovações pendentes <b>0</b></span>
@@ -195,8 +195,8 @@
 <script>
 (function(){
   // ---------- mock data ----------
-  var GC=[38,45,52,40,48,55,42,44,50,39,47,53,41,46]; // padrão diário de gasto
-  var CC=[2,1,3,2,2,3,1,2,3,1,2,3,2,3];               // padrão diário de conversas
+  var GC=[8,11,9,12,10,7,11,9,12,8,10,11,9,13];  // padrão diário de gasto (R$)
+  var CC=[4,6,3,8,5,4,7,5,9,4,6,8,5,7];          // padrão diário de novos seguidores
   function series(n){
     var g=[],c=[],d=[],base=new Date(2026,6,1);        // termina em 01/07/2026
     for(var i=n-1;i>=0;i--){
@@ -208,9 +208,9 @@
   }
   function sum(a){return a.reduce(function(x,y){return x+y},0)}
   var P={
-    7:  Object.assign(series(7),  {agend:4,  prevConv:11, prevCusto:24.5, alcance:4300,  cliques:128}),
-    14: Object.assign(series(14), {agend:9,  prevConv:24, prevCusto:23.9, alcance:8900,  cliques:262}),
-    30: Object.assign(series(30), {agend:17, prevConv:48, prevCusto:23.5, alcance:19200, cliques:540})
+    7:  Object.assign(series(7),  {dms:5,  prevSeg:29,  prevCusto:2.10, alcance:7800,  visitas:620}),
+    14: Object.assign(series(14), {dms:12, prevSeg:66,  prevCusto:1.95, alcance:15800, visitas:1240}),
+    30: Object.assign(series(30), {dms:26, prevSeg:140, prevCusto:1.92, alcance:33500, visitas:2600})
   };
   var cur=14;
 
@@ -229,22 +229,22 @@
 
   // ---------- KPIs ----------
   function kpis(p){
-    var invest=sum(p.gasto), conv=sum(p.conv);
-    var custo=invest/conv, cpa=invest/p.agend;
-    var dConv=Math.round((conv-p.prevConv)/p.prevConv*100);
+    var invest=sum(p.gasto), seg=sum(p.conv);
+    var custo=invest/seg;
+    var dSeg=Math.round((seg-p.prevSeg)/p.prevSeg*100);
     var dCusto=Math.round((custo-p.prevCusto)/p.prevCusto*100);
     var el=document.getElementById('kpis');
     el.innerHTML=
       '<div class="kpi"><span class="lbl">Investido no período</span><span class="val">'+fmtBRL(invest)+'</span>'+
-        '<span class="sub">no mês: R$ 1.240 de R$ 1.500 (teto)</span><div class="tetobar"><i style="width:'+Math.min(100,Math.round(1240/1500*100))+'%"></i></div></div>'+
-      '<div class="kpi"><span class="lbl">Conversas no WhatsApp</span><span class="val">'+conv+'</span>'+
-        '<span class="delta '+(dConv>=0?'good':'warn')+'">'+(dConv>=0?'▲':'▼')+' '+Math.abs(dConv)+'% vs período anterior</span></div>'+
-      '<div class="kpi"><span class="lbl">Custo por conversa</span><span class="val">'+fmtBRL(custo,2)+'</span>'+
+        '<span class="sub">teto do mês: R$ 300 · trava ativa</span><div class="tetobar"><i style="width:'+Math.min(100,Math.round(invest/300*100))+'%"></i></div></div>'+
+      '<div class="kpi"><span class="lbl">Novos seguidores (dentistas)</span><span class="val">'+seg+'</span>'+
+        '<span class="delta '+(dSeg>=0?'good':'warn')+'">'+(dSeg>=0?'▲':'▼')+' '+Math.abs(dSeg)+'% vs período anterior</span></div>'+
+      '<div class="kpi"><span class="lbl">Custo por seguidor</span><span class="val">'+fmtBRL(custo,2)+'</span>'+
         '<span class="delta '+(dCusto<=0?'good':'warn')+'">'+(dCusto<=0?'▼':'▲')+' '+Math.abs(dCusto)+'% '+(dCusto<=0?'mais barato':'mais caro')+'</span></div>'+
-      '<div class="kpi"><span class="lbl">Agendamentos</span><span class="val">'+p.agend+'</span>'+
-        '<span class="sub">confirmados pela recepção</span></div>'+
-      '<div class="kpi"><span class="lbl">Custo por agendamento</span><span class="val">'+fmtBRL(cpa,2)+'</span>'+
-        '<span class="sub">meta: até R$ 120</span></div>';
+      '<div class="kpi"><span class="lbl">Visitas ao perfil</span><span class="val">'+fmtN(p.visitas)+'</span>'+
+        '<span class="sub">gente que entrou pra te conhecer</span></div>'+
+      '<div class="kpi"><span class="lbl">Conversas iniciadas</span><span class="val">'+p.dms+'</span>'+
+        '<span class="sub">direct + WhatsApp — interessados</span></div>';
   }
 
   // ---------- gráfico de linha (conversas) ----------
@@ -270,7 +270,7 @@
       return '<circle data-i="'+i+'" cx="'+pt[0]+'" cy="'+pt[1]+'" r="3.4" fill="var(--data)" stroke="var(--card)" stroke-width="2"/>';
     }).join('');
     var el=document.getElementById('chartConv');
-    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Conversas por dia">'+grid+ticks+
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Novos seguidores por dia">'+grid+ticks+
       '<path d="'+area+'" fill="var(--data-soft)"/>'+
       '<path d="'+path+'" fill="none" stroke="var(--data)" stroke-width="2" stroke-linecap="round"/>'+
       dots+peak+xlabs+
@@ -279,7 +279,7 @@
     hover.addEventListener('mousemove',function(e){
       var r=svg.getBoundingClientRect(),xr=(e.clientX-r.left)/r.width*W;
       var i=Math.max(0,Math.min(n-1,Math.round((xr-PL)/((W-PL-PR)/(n-1||1)))));
-      showTip('<b>'+p.days[i]+'</b><br>'+p.conv[i]+' conversa'+(p.conv[i]===1?'':'s'),e.clientX,e.clientY);
+      showTip('<b>'+p.days[i]+'</b><br>'+p.conv[i]+' seguidor'+(p.conv[i]===1?'':'es')+' novo'+(p.conv[i]===1?'':'s'),e.clientX,e.clientY);
     });
     hover.addEventListener('mouseleave',hideTip);
   }
@@ -290,7 +290,7 @@
     var y=function(v){return PT+(H-PT-PB)*(1-v/max)};
     var slot=(W-PL-PR)/n, bw=Math.min(26,slot*0.66);
     var grid='',ticks='';
-    [0,30,60].forEach(function(v){
+    [0,Math.round(max/2),Math.round(max)].forEach(function(v){
       grid+='<line x1="'+PL+'" x2="'+(W-PR)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--grid)" stroke-width="1"/>';
       ticks+='<text class="tick" x="'+(PL-6)+'" y="'+(y(v)+3)+'" text-anchor="end">'+v+'</text>';
     });
@@ -315,12 +315,12 @@
   // ---------- funil ----------
   var RAMP=['#99E0D5','#5BC4B2','#2AA893','#0D9488'];
   function funnel(p){
-    var conv=sum(p.conv);
+    var seg=sum(p.conv);
     var stages=[
-      {nm:'Pessoas alcançadas',sub:'viram o anúncio',v:p.alcance},
-      {nm:'Cliques no anúncio',sub:'tocaram pra saber mais',v:p.cliques},
-      {nm:'Conversas WhatsApp',sub:'chamaram de verdade',v:conv},
-      {nm:'Agendamentos',sub:'entraram na agenda',v:p.agend}
+      {nm:'Dentistas alcançados',sub:'viram o anúncio',v:p.alcance},
+      {nm:'Visitas ao perfil',sub:'entraram pra conhecer',v:p.visitas},
+      {nm:'Novos seguidores',sub:'ficaram',v:seg},
+      {nm:'Conversas iniciadas',sub:'direct/WhatsApp',v:p.dms}
     ];
     var html='';
     stages.forEach(function(s,i){
