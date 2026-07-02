@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel — Dr. Cussioli · Instagram</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5FAF8; --card:#FFFFFF; --ink:#0F2E2A; --muted:#4E6864; --faint:#8AA39D;
+    --teal-ui:#0A5C50; --mint:#DFF2EC; --mint-soft:#EEF7F4; --line:#D9E8E3;
+    --data:#0D9488; --data-soft:rgba(13,148,136,.14);
+    --good:#15803D; --warn:#B26E14; --grid:#E4EFEB;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Instrument Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px}
+  .mono{font-family:"Spline Sans Mono",ui-monospace,monospace}
+
+  .topbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:20px 0 6px}
+  .brand .eyebrow{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-ui);display:block}
+  .brand h1{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:1.55rem;letter-spacing:-.01em;margin:2px 0 0}
+  .demo{
+    font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.66rem;letter-spacing:.1em;
+    background:#FDF1DC;color:var(--warn);border:1px solid #F2DDB4;border-radius:999px;padding:5px 12px;
+  }
+  .periods{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:4px}
+  .periods button{
+    font:inherit;font-weight:600;font-size:.82rem;cursor:pointer;border:0;border-radius:8px;
+    background:transparent;color:var(--muted);padding:7px 14px;
+  }
+  .periods button.on{background:var(--teal-ui);color:#fff}
+  .periods button:focus-visible{outline:2px solid var(--data);outline-offset:2px}
+
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 15px 12px}
+  .kpi .lbl{font-size:.78rem;color:var(--muted);display:block}
+  .kpi .val{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:1.7rem;letter-spacing:-.01em;line-height:1.1;display:block;margin:3px 0 2px}
+  .kpi .sub{font-size:.72rem;color:var(--faint);display:block}
+  .delta{display:inline-flex;align-items:center;gap:3px;font-size:.72rem;font-weight:600;border-radius:6px;padding:1px 7px;margin-top:5px}
+  .delta.good{background:#E7F4EB;color:var(--good)}
+  .delta.warn{background:#FDF1DC;color:var(--warn)}
+  .tetobar{height:6px;background:var(--mint-soft);border-radius:99px;margin-top:8px;overflow:hidden}
+  .tetobar i{display:block;height:100%;background:var(--data);border-radius:99px}
+
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 16px 10px}
+  .card h2{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:600;font-size:1rem;margin:0 0 2px}
+  .card .note{font-size:.76rem;color:var(--faint);margin:0 0 8px;display:block}
+  svg{display:block;width:100%;height:auto}
+  .tick{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:10px;fill:var(--faint)}
+  .dlabel{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:10.5px;fill:var(--ink);font-weight:500}
+
+  .funnel .stage{display:grid;grid-template-columns:118px 1fr 92px;gap:10px;align-items:center;padding:7px 0}
+  .funnel .stage .nm{font-size:.83rem;color:var(--ink)}
+  .funnel .stage .nm small{display:block;color:var(--faint);font-size:.7rem}
+  .funnel .bar{height:22px;background:var(--mint-soft);border-radius:6px;overflow:hidden}
+  .funnel .bar i{display:block;height:100%;border-radius:0 4px 4px 0}
+  .funnel .v{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.78rem;text-align:right;color:var(--ink)}
+  .funnel .conv{font-size:.7rem;color:var(--faint);padding-left:128px;margin:-2px 0 2px}
+
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);text-align:left;font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line)}
+  td{padding:10px 8px;border-bottom:1px solid var(--mint-soft);vertical-align:middle}
+  tr:last-child td{border-bottom:0}
+  td.num{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.8rem;text-align:right;white-space:nowrap}
+  th.num{text-align:right}
+  .cbar{display:inline-block;height:8px;border-radius:99px;background:var(--data);vertical-align:middle;margin-right:8px}
+  .chip{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;border-radius:999px;padding:3px 10px}
+  .chip.on{background:#E7F4EB;color:var(--good)}
+  .chip.test{background:#FDF1DC;color:var(--warn)}
+
+  .leitura{background:var(--ink);color:#DFEFE9;border-radius:13px;padding:18px 20px;margin-top:10px}
+  .leitura h2{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:600;font-size:1rem;color:#fff;margin:0 0 8px}
+  .leitura p{margin:0 0 12px;font-size:.9rem;line-height:1.55;color:#C9E2DA}
+  .guards{display:flex;flex-wrap:wrap;gap:8px}
+  .guard{
+    font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.04em;
+    background:#153B36;border:1px solid #1E4B45;border-radius:999px;padding:6px 12px;color:#9CC8BC;
+  }
+  .guard b{color:#fff;font-weight:500}
+
+  footer{margin-top:18px;font-size:.74rem;color:var(--faint);text-align:center}
+
+  #tip{
+    position:fixed;z-index:40;pointer-events:none;display:none;
+    background:var(--ink);color:#fff;border-radius:8px;padding:7px 11px;
+    font-size:.78rem;line-height:1.35;box-shadow:0 4px 14px rgba(15,46,42,.25);
+  }
+  #tip b{font-family:"Spline Sans Mono",ui-monospace,monospace;font-weight:500}
+
+  @media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.kpi:first-child{grid-column:1/-1}.row{grid-template-columns:1fr}}
+  @media (max-width:520px){.funnel .stage{grid-template-columns:96px 1fr 74px}.funnel .conv{padding-left:106px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <span class="eyebrow">painel de tráfego · instagram</span>
+      <h1>Dr. Cussioli</h1>
+    </div>
+    <span class="demo">demo · dados de exemplo</span>
+    <div class="periods" role="tablist" aria-label="Período">
+      <button data-p="7">7 dias</button>
+      <button data-p="14" class="on">14 dias</button>
+      <button data-p="30">30 dias</button>
+    </div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="row">
+    <div class="card">
+      <h2>Conversas no WhatsApp por dia</h2>
+      <span class="note">cada conversa é um paciente em potencial que chamou pelo anúncio</span>
+      <div id="chartConv"></div>
+    </div>
+    <div class="card">
+      <h2>Investimento por dia (R$)</h2>
+      <span class="note">quanto foi gasto em anúncio a cada dia — sempre abaixo do teto</span>
+      <div id="chartGasto"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card funnel">
+      <h2>Do anúncio ao agendamento</h2>
+      <span class="note">o caminho completo no período selecionado</span>
+      <div id="funnel"></div>
+    </div>
+    <div class="card">
+      <h2>Por criativo (anúncio)</h2>
+      <span class="note">onde cada real está performando melhor — últimos 30 dias</span>
+      <table>
+        <thead><tr><th>Criativo</th><th class="num">Investido</th><th class="num">Conversas</th><th>Custo por conversa</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Lentes — antes &amp; depois</td>
+            <td class="num">R$ 280</td>
+            <td class="num">14</td>
+            <td><span class="cbar" style="width:52px"></span><span class="mono" style="font-size:.8rem">R$ 20,00</span></td>
+            <td><span class="chip on">● ativo</span></td>
+          </tr>
+          <tr>
+            <td>Clareamento — vídeo</td>
+            <td class="num">R$ 210</td>
+            <td class="num">9</td>
+            <td><span class="cbar" style="width:61px"></span><span class="mono" style="font-size:.8rem">R$ 23,30</span></td>
+            <td><span class="chip on">● ativo</span></td>
+          </tr>
+          <tr>
+            <td>Avaliação — 1ª consulta</td>
+            <td class="num">R$ 130</td>
+            <td class="num">4</td>
+            <td><span class="cbar" style="width:85px"></span><span class="mono" style="font-size:.8rem">R$ 32,50</span></td>
+            <td><span class="chip test">◐ em teste</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="leitura">
+    <h2>Leitura do Pedro — esta semana</h2>
+    <p id="leituraTxt">
+      O anúncio de lentes com antes &amp; depois é o campeão: traz conversa a R$ 20 — bem
+      abaixo da meta de R$ 40. O de avaliação está caro e, se não melhorar até sexta,
+      o sistema vai propor pausar. Nenhuma anomalia de gasto no período.
+    </p>
+    <div class="guards">
+      <span class="guard">teto do mês <b>R$ 1.240 / R$ 1.500</b></span>
+      <span class="guard">travas de gasto <b>✓ ativas</b></span>
+      <span class="guard">vigia · último check <b>hoje 15:40 ✓</b></span>
+      <span class="guard">aprovações pendentes <b>0</b></span>
+    </div>
+  </div>
+
+  <footer>
+    painel de demonstração — a versão real conecta direto na conta de anúncios e atualiza todo dia ·
+    projeto cussioli · 02 jul 2026
+  </footer>
+</div>
+
+<div id="tip"></div>
+
+<script>
+(function(){
+  // ---------- mock data ----------
+  var GC=[38,45,52,40,48,55,42,44,50,39,47,53,41,46]; // padrão diário de gasto
+  var CC=[2,1,3,2,2,3,1,2,3,1,2,3,2,3];               // padrão diário de conversas
+  function series(n){
+    var g=[],c=[],d=[],base=new Date(2026,6,1);        // termina em 01/07/2026
+    for(var i=n-1;i>=0;i--){
+      var dt=new Date(base); dt.setDate(base.getDate()-i);
+      d.push(dt.getDate()+'/'+(dt.getMonth()+1));
+      g.push(GC[(n-1-i)%14]); c.push(CC[(n-1-i)%14]);
+    }
+    return {days:d,gasto:g,conv:c};
+  }
+  function sum(a){return a.reduce(function(x,y){return x+y},0)}
+  var P={
+    7:  Object.assign(series(7),  {agend:4,  prevConv:11, prevCusto:24.5, alcance:4300,  cliques:128}),
+    14: Object.assign(series(14), {agend:9,  prevConv:24, prevCusto:23.9, alcance:8900,  cliques:262}),
+    30: Object.assign(series(30), {agend:17, prevConv:48, prevCusto:23.5, alcance:19200, cliques:540})
+  };
+  var cur=14;
+
+  var fmtBRL=function(v,dec){return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:dec==null?0:dec,maximumFractionDigits:dec==null?0:dec})};
+  var fmtN=function(v){return v.toLocaleString('pt-BR')};
+
+  // ---------- tooltip ----------
+  var tip=document.getElementById('tip');
+  function showTip(html,x,y){
+    tip.innerHTML=html;tip.style.display='block';
+    var r=tip.getBoundingClientRect();
+    tip.style.left=Math.min(x+14,window.innerWidth-r.width-8)+'px';
+    tip.style.top=(y-r.height-12)+'px';
+  }
+  function hideTip(){tip.style.display='none'}
+
+  // ---------- KPIs ----------
+  function kpis(p){
+    var invest=sum(p.gasto), conv=sum(p.conv);
+    var custo=invest/conv, cpa=invest/p.agend;
+    var dConv=Math.round((conv-p.prevConv)/p.prevConv*100);
+    var dCusto=Math.round((custo-p.prevCusto)/p.prevCusto*100);
+    var el=document.getElementById('kpis');
+    el.innerHTML=
+      '<div class="kpi"><span class="lbl">Investido no período</span><span class="val">'+fmtBRL(invest)+'</span>'+
+        '<span class="sub">no mês: R$ 1.240 de R$ 1.500 (teto)</span><div class="tetobar"><i style="width:'+Math.min(100,Math.round(1240/1500*100))+'%"></i></div></div>'+
+      '<div class="kpi"><span class="lbl">Conversas no WhatsApp</span><span class="val">'+conv+'</span>'+
+        '<span class="delta '+(dConv>=0?'good':'warn')+'">'+(dConv>=0?'▲':'▼')+' '+Math.abs(dConv)+'% vs período anterior</span></div>'+
+      '<div class="kpi"><span class="lbl">Custo por conversa</span><span class="val">'+fmtBRL(custo,2)+'</span>'+
+        '<span class="delta '+(dCusto<=0?'good':'warn')+'">'+(dCusto<=0?'▼':'▲')+' '+Math.abs(dCusto)+'% '+(dCusto<=0?'mais barato':'mais caro')+'</span></div>'+
+      '<div class="kpi"><span class="lbl">Agendamentos</span><span class="val">'+p.agend+'</span>'+
+        '<span class="sub">confirmados pela recepção</span></div>'+
+      '<div class="kpi"><span class="lbl">Custo por agendamento</span><span class="val">'+fmtBRL(cpa,2)+'</span>'+
+        '<span class="sub">meta: até R$ 120</span></div>';
+  }
+
+  // ---------- gráfico de linha (conversas) ----------
+  var W=560,H=200,PL=30,PR=14,PT=16,PB=26;
+  function scaleX(i,n){return PL+(W-PL-PR)*(n===1?0.5:i/(n-1))}
+  function lineChart(p){
+    var n=p.conv.length,max=Math.max.apply(null,p.conv)+1;
+    var y=function(v){return PT+(H-PT-PB)*(1-v/max)};
+    var pts=p.conv.map(function(v,i){return [scaleX(i,n),y(v)]});
+    var path=pts.map(function(pt,i){return (i?'L':'M')+pt[0].toFixed(1)+' '+pt[1].toFixed(1)}).join(' ');
+    var area=path+' L'+pts[n-1][0].toFixed(1)+' '+(H-PB)+' L'+pts[0][0].toFixed(1)+' '+(H-PB)+' Z';
+    var grid='',ticks='';
+    [0,Math.round(max/2),max].forEach(function(v){
+      grid+='<line x1="'+PL+'" x2="'+(W-PR)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--grid)" stroke-width="1"/>';
+      ticks+='<text class="tick" x="'+(PL-6)+'" y="'+(y(v)+3)+'" text-anchor="end">'+v+'</text>';
+    });
+    var step=Math.ceil(n/7),xlabs='';
+    for(var i=0;i<n;i+=step){xlabs+='<text class="tick" x="'+scaleX(i,n)+'" y="'+(H-8)+'" text-anchor="middle">'+p.days[i]+'</text>'}
+    // rótulo direto só no pico (seletivo)
+    var mi=p.conv.indexOf(Math.max.apply(null,p.conv));
+    var peak='<text class="dlabel" x="'+pts[mi][0]+'" y="'+(pts[mi][1]-9)+'" text-anchor="middle">'+p.conv[mi]+'</text>';
+    var dots=pts.map(function(pt,i){
+      return '<circle data-i="'+i+'" cx="'+pt[0]+'" cy="'+pt[1]+'" r="3.4" fill="var(--data)" stroke="var(--card)" stroke-width="2"/>';
+    }).join('');
+    var el=document.getElementById('chartConv');
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Conversas por dia">'+grid+ticks+
+      '<path d="'+area+'" fill="var(--data-soft)"/>'+
+      '<path d="'+path+'" fill="none" stroke="var(--data)" stroke-width="2" stroke-linecap="round"/>'+
+      dots+peak+xlabs+
+      '<rect id="hover" x="'+PL+'" y="'+PT+'" width="'+(W-PL-PR)+'" height="'+(H-PT-PB)+'" fill="transparent"/></svg>';
+    var svg=el.querySelector('svg'),hover=el.querySelector('#hover');
+    hover.addEventListener('mousemove',function(e){
+      var r=svg.getBoundingClientRect(),xr=(e.clientX-r.left)/r.width*W;
+      var i=Math.max(0,Math.min(n-1,Math.round((xr-PL)/((W-PL-PR)/(n-1||1)))));
+      showTip('<b>'+p.days[i]+'</b><br>'+p.conv[i]+' conversa'+(p.conv[i]===1?'':'s'),e.clientX,e.clientY);
+    });
+    hover.addEventListener('mouseleave',hideTip);
+  }
+
+  // ---------- gráfico de barras (gasto) ----------
+  function barChart(p){
+    var n=p.gasto.length,max=Math.max.apply(null,p.gasto)*1.15;
+    var y=function(v){return PT+(H-PT-PB)*(1-v/max)};
+    var slot=(W-PL-PR)/n, bw=Math.min(26,slot*0.66);
+    var grid='',ticks='';
+    [0,30,60].forEach(function(v){
+      grid+='<line x1="'+PL+'" x2="'+(W-PR)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--grid)" stroke-width="1"/>';
+      ticks+='<text class="tick" x="'+(PL-6)+'" y="'+(y(v)+3)+'" text-anchor="end">'+v+'</text>';
+    });
+    var bars='';
+    p.gasto.forEach(function(v,i){
+      var x=PL+slot*i+(slot-bw)/2,yy=y(v),h=H-PB-yy;
+      bars+='<path data-i="'+i+'" d="M'+x+' '+(yy+4)+' q0 -4 4 -4 h'+(bw-8)+' q4 0 4 4 v'+(h-4)+' h-'+bw+' Z" fill="var(--data)"/>';
+    });
+    var step=Math.ceil(n/7),xlabs='';
+    for(var i=0;i<n;i+=step){xlabs+='<text class="tick" x="'+(PL+slot*i+slot/2)+'" y="'+(H-8)+'" text-anchor="middle">'+p.days[i]+'</text>'}
+    var el=document.getElementById('chartGasto');
+    el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Investimento por dia">'+grid+ticks+bars+xlabs+'</svg>';
+    el.querySelectorAll('path[data-i]').forEach(function(b){
+      b.addEventListener('mousemove',function(e){
+        var i=+b.dataset.i;
+        showTip('<b>'+p.days[i]+'</b><br>'+fmtBRL(p.gasto[i])+' investidos',e.clientX,e.clientY);
+      });
+      b.addEventListener('mouseleave',hideTip);
+    });
+  }
+
+  // ---------- funil ----------
+  var RAMP=['#99E0D5','#5BC4B2','#2AA893','#0D9488'];
+  function funnel(p){
+    var conv=sum(p.conv);
+    var stages=[
+      {nm:'Pessoas alcançadas',sub:'viram o anúncio',v:p.alcance},
+      {nm:'Cliques no anúncio',sub:'tocaram pra saber mais',v:p.cliques},
+      {nm:'Conversas WhatsApp',sub:'chamaram de verdade',v:conv},
+      {nm:'Agendamentos',sub:'entraram na agenda',v:p.agend}
+    ];
+    var html='';
+    stages.forEach(function(s,i){
+      var w=Math.max(3,Math.round(s.v/stages[0].v*100));
+      if(i>0){
+        var pct=(s.v/stages[i-1].v*100);
+        html+='<div class="conv">↓ '+(pct<10?pct.toFixed(1):Math.round(pct))+'% da etapa anterior</div>';
+      }
+      html+='<div class="stage"><div class="nm">'+s.nm+'<small>'+s.sub+'</small></div>'+
+        '<div class="bar"><i data-i="'+i+'" style="width:'+w+'%;background:'+RAMP[i]+'"></i></div>'+
+        '<div class="v">'+fmtN(s.v)+'</div></div>';
+    });
+    document.getElementById('funnel').innerHTML=html;
+  }
+
+  // ---------- períodos ----------
+  function render(){var p=P[cur];kpis(p);lineChart(p);barChart(p);funnel(p)}
+  document.querySelectorAll('.periods button').forEach(function(b){
+    b.addEventListener('click',function(){
+      cur=+b.dataset.p;
+      document.querySelectorAll('.periods button').forEach(function(x){x.classList.toggle('on',x===b)});
+      render();
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>
