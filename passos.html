@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passo a passo — Dr. Cussioli</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5FAF8; --card:#FFFFFF; --ink:#0F2E2A; --muted:#4E6864;
+    --teal:#0E7C6B; --teal-deep:#0A5C50; --mint:#DFF2EC; --mint-soft:#EEF7F4;
+    --line:#D9E8E3; --amber-ink:#8A5410;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Instrument Sans",system-ui,sans-serif;font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 18px 70px}
+  header{padding:34px 0 6px}
+  .eyebrow{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-deep)}
+  h1{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.06;letter-spacing:-.015em;margin:10px 0 12px}
+  h1 em{font-style:normal;color:var(--teal-deep)}
+  .lead{color:var(--muted);margin:0}
+
+  .calm{
+    background:var(--mint);border:1px solid #C6E5DB;border-radius:14px;
+    padding:14px 18px;margin:20px 0;font-size:.92rem;
+  }
+  .calm strong{display:block;margin-bottom:4px}
+
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 18px 14px;margin:14px 0;
+  }
+  .step .head{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+  .step .n{
+    flex:0 0 auto;width:38px;height:38px;border-radius:12px;background:var(--mint);
+    color:var(--teal-deep);display:flex;align-items:center;justify-content:center;
+    font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.85rem;font-weight:500;
+  }
+  .step h2{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:600;font-size:1.1rem;margin:0;line-height:1.2}
+  .step h2 small{display:block;font-family:"Instrument Sans",sans-serif;font-weight:400;font-size:.78rem;color:var(--muted);margin-top:2px}
+  .step ol{margin:6px 0 4px;padding-left:22px}
+  .step ol li{padding:4px 0;font-size:.94rem}
+  .btnname{
+    font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.8rem;
+    background:var(--mint-soft);border:1px solid var(--line);border-radius:6px;padding:1px 7px;white-space:nowrap;
+  }
+  .step .why{font-size:.82rem;color:var(--muted);border-top:1px solid var(--mint-soft);margin-top:10px;padding-top:8px}
+  .warn{
+    background:#FDF1DC;border:1px solid #F2DDB4;border-radius:9px;color:var(--amber-ink);
+    padding:9px 13px;font-size:.85rem;margin-top:10px;
+  }
+  a{color:var(--teal-deep);font-weight:600}
+
+  .depois{background:var(--ink);color:#DFEFE9;border-radius:14px;padding:18px 20px;margin:24px 0}
+  .depois h2{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:600;font-size:1.05rem;color:#fff;margin:0 0 10px}
+  .depois ul{margin:0;padding-left:20px;font-size:.9rem;color:#C9E2DA}
+  .depois ul li{padding:3px 0}
+
+  .faq{margin:24px 0 0}
+  .faq h2{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:600;font-size:1.1rem;margin:0 0 8px}
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 16px;margin-bottom:8px}
+  .faq summary{font-weight:600;font-size:.93rem;cursor:pointer}
+  .faq p{font-size:.9rem;color:var(--muted);margin:8px 0 2px}
+
+  footer{margin-top:30px;font-size:.76rem;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Dr. Cussioli · guia de configuração</span>
+    <h1>Passo a passo — <em>15 minutinhos</em> e o resto é comigo.</h1>
+    <p class="lead">Tudo aqui é feito no <strong>seu celular</strong>, na <strong>sua conta pessoal</strong>. O perfil da clínica não é tocado em nada.</p>
+  </header>
+
+  <div class="calm">
+    <strong>Fica tranquilo:</strong>
+    Ninguém vai postar nada no seu perfil. Os anúncios não aparecem no seu feed como post.
+    Todo gasto tem trava (teto de R$ 300/mês) e nenhum anúncio entra no ar sem você saber.
+  </div>
+
+  <div class="step">
+    <div class="head"><span class="n">1</span><h2>Deixar seu Instagram "profissional"<small>2 min · dentro do app do Instagram</small></h2></div>
+    <ol>
+      <li>Abra o Instagram no <strong>seu perfil pessoal</strong> e toque no menu <span class="btnname">☰</span> (canto superior direito)</li>
+      <li>Toque em <span class="btnname">Configurações e privacidade</span></li>
+      <li>Procure <span class="btnname">Tipo de conta e ferramentas</span></li>
+      <li>Toque em <span class="btnname">Mudar para conta profissional</span></li>
+      <li>Escolha <span class="btnname">Criador</span> e uma categoria (ex.: "Dentista" ou "Saúde/beleza")</li>
+      <li>Se ele oferecer pra conectar Página do Facebook, pode <strong>pular</strong> — a gente resolve depois</li>
+    </ol>
+    <div class="why">Por quê: conta pessoal "comum" não pode receber anúncio. Virar "Criador" não muda NADA na aparência do seu perfil nem nos seus posts.</div>
+    <div class="warn">Os nomes dos menus mudam um pouco conforme a versão do app — se não achar, procura por "conta profissional" na busca das configurações.</div>
+  </div>
+
+  <div class="step">
+    <div class="head"><span class="n">2</span><h2>Criar o seu "portfólio empresarial" na Meta<small>5 min · no navegador (celular ou computador)</small></h2></div>
+    <ol>
+      <li>Acesse <a href="https://business.facebook.com" target="_blank" rel="noopener">business.facebook.com</a></li>
+      <li>Toque em <span class="btnname">Continuar com o Instagram</span> e entre com o <strong>seu</strong> Instagram (o mesmo do passo 1). Se preferir, pode entrar com seu Facebook pessoal — tanto faz</li>
+      <li>Ele vai oferecer <span class="btnname">Criar um portfólio empresarial</span> — aceita</li>
+      <li>Nome do portfólio: <strong>Dr. Cussioli</strong> (ou como quiser aparecer)</li>
+      <li>Preencha seu nome e seu e-mail — vai chegar um e-mail de confirmação, <strong>clica nele</strong></li>
+    </ol>
+    <div class="why">Por quê: o portfólio é o "escritório" que gerencia anúncios. Ele nasce SEU — o Pedro só recebe a chave de gerente no próximo passo. Assim o histórico, o pixel e tudo mais ficam sempre no seu nome.</div>
+  </div>
+
+  <div class="step">
+    <div class="head"><span class="n">3</span><h2>Convidar o Pedro como administrador<small>3 min · dentro do portfólio que você acabou de criar</small></h2></div>
+    <ol>
+      <li>Dentro do portfólio, ache o <span class="btnname">⚙️ Configurações</span> (ou "Configurações do negócio")</li>
+      <li>No menu, toque em <span class="btnname">Pessoas</span></li>
+      <li>Toque em <span class="btnname">Adicionar pessoas</span> (ou "Convidar pessoas")</li>
+      <li>Digite o e-mail: <strong>pedrobgbmattos@hotmail.com</strong></li>
+      <li>Nível de acesso: marque <span class="btnname">Acesso total</span> (administrador)</li>
+      <li>Envie o convite e <strong>me avisa no WhatsApp</strong> 📲</li>
+    </ol>
+    <div class="why">Por quê: com esse acesso eu monto tudo do meu computador sem precisar da sua senha de nada.</div>
+  </div>
+
+  <div class="step">
+    <div class="head"><span class="n">4</span><h2>Ligar a verificação em duas etapas<small>2 min · a Meta exige pra quem administra anúncios</small></h2></div>
+    <ol>
+      <li>No app do Instagram ou Facebook: <span class="btnname">Central de Contas</span> → <span class="btnname">Senha e segurança</span></li>
+      <li>Toque em <span class="btnname">Autenticação de dois fatores</span> e ative (pelo WhatsApp/SMS é o mais fácil)</li>
+    </ol>
+    <div class="why">Por quê: além de exigido, protege sua conta — ninguém entra só com a senha.</div>
+  </div>
+
+  <div class="step">
+    <div class="head"><span class="n">5</span><h2>Preencher a anamnese<small>8 min · pode ser do celular</small></h2></div>
+    <ol>
+      <li>Abre <a href="https://pedrobmattos.github.io/cussioli-anamnese/" target="_blank" rel="noopener">este formulário</a> e responde o que souber</li>
+      <li>Na aba <span class="btnname">Prints e fotos 📎</span>, anexa: print do seu perfil, do post do case e do vídeo institucional</li>
+    </ol>
+    <div class="why">Por quê: é daqui que saem o texto dos anúncios, o público certo e a landing page.</div>
+  </div>
+
+  <div class="step">
+    <div class="head"><span class="n">6</span><h2>Me mandar o material da mentoria<small>quando estiver pronto — combinamos amanhã</small></h2></div>
+    <ol>
+      <li>A "página modelo" que você está montando: fotos escolhidas + informações (o que é, formato, pra quem)</li>
+      <li>Pode mandar pelo WhatsApp ou anexar no próprio formulário</li>
+    </ol>
+    <div class="why">Por quê: com isso eu te devolvo <strong>3 modelos de landing page</strong> pra você escolher.</div>
+  </div>
+
+  <div class="depois">
+    <h2>Daqui pra frente é comigo (você não faz nada)</h2>
+    <ul>
+      <li>Aceito o convite e monto a conta de anúncio (aí sim te peço o cartão)</li>
+      <li>Configuro a trava de gasto ANTES de qualquer anúncio</li>
+      <li>Crio a Página do Facebook (exigência técnica — pode ficar vazia) e conecto seu Instagram</li>
+      <li>Preparo os primeiros anúncios com os seus posts — tudo nasce <strong>pausado</strong> e você vê antes de ir ao ar</li>
+      <li>Te mando relatório diário + um painel que você abre a hora que quiser</li>
+    </ul>
+  </div>
+
+  <div class="faq">
+    <h2>Dúvidas rápidas</h2>
+    <details><summary>Isso muda alguma coisa no meu Instagram?</summary><p>Não. Seu perfil, seus posts e seus seguidores ficam exatamente iguais. A única diferença é "nos bastidores": sua conta passa a poder receber anúncios.</p></details>
+    <details><summary>E o perfil da clínica?</summary><p>Não é tocado em nada. Tudo isso é só na sua conta pessoal, separado do trabalho que já existe lá.</p></details>
+    <details><summary>Quanto vou gastar?</summary><p>R$ 300/mês de anúncio (o teste que combinamos), no seu cartão, com trava configurada — é impossível passar do teto sem você autorizar.</p></details>
+    <details><summary>O Pedro vai ter minha senha?</summary><p>Não. O convite de administrador dá acesso só às ferramentas de anúncio — sem senha, e você pode remover o acesso quando quiser.</p></details>
+  </div>
+
+  <footer>dr. cussioli · projeto de tráfego · qualquer dúvida, chama o Pedro no WhatsApp</footer>
+</div>
+</body>
+</html>
