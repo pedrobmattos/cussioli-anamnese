@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anamnese digital — Clínica Cussioli</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5FAF8; --card:#FFFFFF; --ink:#0F2E2A; --muted:#4E6864;
+    --teal:#0E7C6B; --teal-deep:#0A5C50; --mint:#DFF2EC; --mint-soft:#EEF7F4;
+    --line:#D9E8E3; --amber-ink:#8A5410;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Instrument Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px 80px}
+  .mono{font-family:"Spline Sans Mono",ui-monospace,monospace}
+
+  header{padding:34px 0 10px}
+  .eyebrow{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-deep)}
+  h1{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:clamp(1.7rem,6vw,2.5rem);line-height:1.05;letter-spacing:-.015em;margin:10px 0 12px}
+  h1 em{font-style:normal;color:var(--teal-deep)}
+  .lead{color:var(--ink);margin:0 0 8px}
+  .lead small{display:block;color:var(--muted);margin-top:8px;font-size:.85rem}
+
+  .tabs{
+    position:sticky;top:0;z-index:10;display:flex;gap:8px;
+    background:var(--paper);padding:12px 0;margin:14px 0 6px;border-bottom:1px solid var(--line);
+  }
+  .tab{
+    flex:1;text-align:center;font-weight:600;font-size:.95rem;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);color:var(--muted);
+    border-radius:10px;padding:11px 8px;
+  }
+  .tab.on{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+  .tab:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+  .panel{display:none}
+  .panel.on{display:block}
+
+  fieldset{
+    border:1px solid var(--line);background:var(--card);border-radius:14px;
+    margin:16px 0;padding:6px 16px 16px;
+  }
+  legend{
+    font-family:"Bricolage Grotesque",Georgia,serif;font-weight:600;font-size:1.02rem;
+    padding:0 8px;display:flex;gap:8px;align-items:baseline;
+  }
+  legend .k{
+    font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.1em;
+    color:var(--teal-deep);background:var(--mint);border-radius:6px;padding:2px 7px;
+  }
+  .f{padding:12px 0 4px;border-top:1px solid var(--mint-soft)}
+  fieldset .f:first-of-type{border-top:0}
+  .f>label,.f>.lbl{display:block;font-weight:600;font-size:.94rem;margin-bottom:6px}
+  .f .hint{display:block;font-weight:400;font-size:.8rem;color:var(--muted);margin:-2px 0 8px}
+
+  input[type=text],input[type=tel],textarea,select{
+    width:100%;font:inherit;font-size:.95rem;color:var(--ink);
+    border:1px solid var(--line);border-radius:9px;background:var(--mint-soft);
+    padding:11px 12px;
+  }
+  textarea{min-height:74px;resize:vertical}
+  input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  ::placeholder{color:#8FA9A3}
+
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .opt span{
+    display:inline-block;border:1px solid var(--line);background:#fff;border-radius:999px;
+    padding:9px 15px;font-size:.9rem;cursor:pointer;user-select:none;
+  }
+  .opt input:checked+span{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+  .opt input:focus-visible+span{outline:2px solid var(--teal);outline-offset:2px}
+
+  /* prints */
+  .drop{
+    border:2px dashed #A9CEC3;border-radius:14px;background:var(--card);
+    padding:26px 18px;text-align:center;cursor:pointer;
+  }
+  .drop.drag{background:var(--mint)}
+  .drop strong{display:block;margin-bottom:4px}
+  .drop span{font-size:.85rem;color:var(--muted)}
+  .drop input{display:none}
+  .filelist{list-style:none;margin:12px 0 0;padding:0;font-size:.88rem}
+  .filelist li{
+    display:flex;justify-content:space-between;gap:10px;background:var(--card);
+    border:1px solid var(--line);border-radius:9px;padding:8px 12px;margin-bottom:6px;
+  }
+  .filelist .sz{color:var(--muted);font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.72rem;white-space:nowrap}
+  .sizewarn{display:none;background:#FDF1DC;color:var(--amber-ink);border:1px solid #F2DDB4;border-radius:9px;padding:10px 13px;font-size:.86rem;margin-top:10px}
+  .sizewarn.show{display:block}
+  .printtips{font-size:.88rem;color:var(--muted);margin:10px 0 0;padding-left:18px}
+  .printtips li{padding:2px 0}
+
+  .submitbar{margin:26px 0 8px}
+  button.send{
+    width:100%;font:inherit;font-weight:600;font-size:1.05rem;cursor:pointer;
+    background:var(--teal-deep);color:#fff;border:0;border-radius:12px;padding:16px;
+  }
+  button.send:hover{background:var(--teal)}
+  button.send:disabled{background:#9BB9B1;cursor:wait}
+  button.send:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .privacy{font-size:.78rem;color:var(--muted);text-align:center;margin-top:12px}
+  .draftnote{
+    font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.06em;
+    color:var(--muted);text-align:center;margin-top:6px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Clínica Cussioli · anamnese digital</span>
+    <h1>Hoje quem senta na cadeira <em>é a clínica.</em></h1>
+    <p class="lead">
+      Antes de começarmos os anúncios, preciso conhecer a clínica — igual você faz
+      com paciente novo. São 6 blocos rápidos, a maioria é só tocar na opção.
+      <small>Leva ~10 minutos. Responda o que souber — o que ficar em branco a gente vê na call.
+      Suas respostas ficam salvas neste aparelho até você enviar.</small>
+    </p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button type="button" class="tab on" id="tab-q" role="tab" aria-selected="true">Perguntas</button>
+    <button type="button" class="tab" id="tab-p" role="tab" aria-selected="false">Prints 📎</button>
+  </div>
+
+  <form action="https://formsubmit.co/pedrobgbmattos12@gmail.com" method="POST" enctype="multipart/form-data" id="form">
+    <input type="hidden" name="_subject" value="Anamnese — Clínica Cussioli">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://pedrobmattos.github.io/cussioli-anamnese/obrigado.html">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+    <div class="panel on" id="panel-q">
+
+      <fieldset>
+        <legend><span class="k">A</span> A clínica hoje</legend>
+        <div class="f">
+          <span class="lbl">Quais procedimentos você mais quer vender?</span>
+          <span class="hint">Pode marcar vários — isso define por onde os anúncios começam</span>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Implantes"><span>Implantes</span></label>
+            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Lentes/facetas"><span>Lentes / facetas</span></label>
+            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Clareamento"><span>Clareamento</span></label>
+            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Alinhador/orto"><span>Alinhador / orto</span></label>
+            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Clinico geral"><span>Clínico geral</span></label>
+            <label class="opt"><input type="checkbox" name="A1 procedimentos" value="Urgencias"><span>Urgências</span></label>
+          </div>
+          <input type="text" name="A1 outro procedimento" placeholder="outro? escreva aqui" style="margin-top:8px">
+        </div>
+        <div class="f">
+          <label for="a2">Valor médio dos principais procedimentos</label>
+          <span class="hint">Aproximado já ajuda — ex.: implante R$ 3.500, clareamento R$ 800…</span>
+          <textarea id="a2" name="A2 ticket medio" placeholder="escreva aqui"></textarea>
+        </div>
+        <div class="f">
+          <label for="a3">Quantos pacientes novos por mês cabem na agenda? Quais dias/horários ficam vazios?</label>
+          <textarea id="a3" name="A3 capacidade agenda" placeholder="ex.: uns 20 por mês; terça e quinta à tarde são fracas"></textarea>
+        </div>
+        <div class="f">
+          <label for="a4">De quais bairros/cidades vêm seus pacientes?</label>
+          <input type="text" id="a4" name="A4 regiao" placeholder="ex.: centro, Jardim X, cidades vizinhas…">
+        </div>
+        <div class="f">
+          <span class="lbl">Atende convênio ou só particular?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="A5 convenio" value="So particular"><span>Só particular</span></label>
+            <label class="opt"><input type="radio" name="A5 convenio" value="Particular + convenio"><span>Particular + convênio</span></label>
+            <label class="opt"><input type="radio" name="A5 convenio" value="Maioria convenio"><span>Maioria convênio</span></label>
+          </div>
+          <input type="text" name="A5 perfil paciente" placeholder="como é o paciente típico? (idade, perfil)" style="margin-top:8px">
+        </div>
+        <div class="f">
+          <span class="lbl">Atende urgência (dor, dente quebrado)?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="A6 urgencia" value="Sim"><span>Sim</span></label>
+            <label class="opt"><input type="radio" name="A6 urgencia" value="As vezes"><span>Às vezes</span></label>
+            <label class="opt"><input type="radio" name="A6 urgencia" value="Nao"><span>Não</span></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">B</span> Presença digital</legend>
+        <div class="f">
+          <span class="lbl">Tem site ou página da clínica?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="B7 site" value="Tem"><span>Tem</span></label>
+            <label class="opt"><input type="radio" name="B7 site" value="Nao tem"><span>Não tem</span></label>
+            <label class="opt"><input type="radio" name="B7 site" value="Nao sei"><span>Não sei</span></label>
+          </div>
+          <input type="text" name="B7 site url" placeholder="se tem: endereço do site e quem tem a senha" style="margin-top:8px">
+        </div>
+        <div class="f">
+          <span class="lbl">O perfil da clínica no Google Maps é seu (reivindicado)?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="B8 google maps" value="Sim"><span>Sim</span></label>
+            <label class="opt"><input type="radio" name="B8 google maps" value="Nao"><span>Não</span></label>
+            <label class="opt"><input type="radio" name="B8 google maps" value="Nao sei"><span>Não sei</span></label>
+          </div>
+          <input type="text" name="B8 avaliacoes" placeholder="tem ideia de quantas avaliações tem?" style="margin-top:8px">
+        </div>
+        <div class="f">
+          <label for="b9">Instagram da clínica: qual é o @ e quem posta?</label>
+          <input type="text" id="b9" name="B9 instagram" placeholder="@daclinica — posta quem?">
+        </div>
+        <div class="f">
+          <span class="lbl">Já investiu em anúncio pago antes?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="B10 trafego antes" value="Sim"><span>Sim</span></label>
+            <label class="opt"><input type="radio" name="B10 trafego antes" value="Nao"><span>Não</span></label>
+          </div>
+          <textarea name="B10 detalhes" placeholder="se sim: com quem, quanto por mês, o que achou do resultado?" style="margin-top:8px"></textarea>
+        </div>
+        <div class="f">
+          <span class="lbl">O que a clínica já tem de material?</span>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="B11 material" value="Fotos da clinica"><span>Fotos da clínica</span></label>
+            <label class="opt"><input type="checkbox" name="B11 material" value="Fotos da equipe"><span>Fotos da equipe</span></label>
+            <label class="opt"><input type="checkbox" name="B11 material" value="Videos"><span>Vídeos</span></label>
+            <label class="opt"><input type="checkbox" name="B11 material" value="Depoimentos"><span>Depoimentos</span></label>
+            <label class="opt"><input type="checkbox" name="B11 material" value="Nada ainda"><span>Nada ainda</span></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">C</span> Investimento</legend>
+        <div class="f">
+          <span class="lbl">Quanto topa investir em anúncio por mês, por 60 dias?</span>
+          <span class="hint">O 1º mês é calibragem — o sistema aprende o que funciona na sua região</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="C12 orcamento" value="Ate R$900"><span>Até R$ 900</span></label>
+            <label class="opt"><input type="radio" name="C12 orcamento" value="R$900-1500"><span>R$ 900–1.500</span></label>
+            <label class="opt"><input type="radio" name="C12 orcamento" value="R$1500-2500"><span>R$ 1.500–2.500</span></label>
+            <label class="opt"><input type="radio" name="C12 orcamento" value="Mais de R$2500"><span>R$ 2.500+</span></label>
+            <label class="opt"><input type="radio" name="C12 orcamento" value="Quero conversar"><span>Quero conversar</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">A cobrança do Google/Meta fica no cartão de quem?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="C13 cartao" value="Da clinica"><span>Da clínica</span></label>
+            <label class="opt"><input type="radio" name="C13 cartao" value="Meu pessoal"><span>Meu pessoal</span></label>
+            <label class="opt"><input type="radio" name="C13 cartao" value="A definir"><span>A definir</span></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">D</span> Atendimento</legend>
+        <div class="f">
+          <label for="d15">Quem responde o WhatsApp da clínica hoje?</label>
+          <input type="text" id="d15" name="D15 quem responde" placeholder="ex.: a secretária Maria, eu mesmo…">
+          <span class="lbl" style="margin-top:12px">Em quanto tempo costuma responder, de verdade?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Menos de 5 min"><span>&lt; 5 min</span></label>
+            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Ate 1 hora"><span>Até 1h</span></label>
+            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Algumas horas"><span>Algumas horas</span></label>
+            <label class="opt"><input type="radio" name="D15 tempo resposta" value="Depende do dia"><span>Depende</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">Quando os anúncios rodarem: topa responder em até 5 minutos no horário comercial?</span>
+          <span class="hint">Contato que espera esfria — é o que mais derruba o resultado</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="D16 sla" value="Topo"><span>Topo</span></label>
+            <label class="opt"><input type="radio" name="D16 sla" value="Preciso organizar"><span>Preciso organizar</span></label>
+            <label class="opt"><input type="radio" name="D16 sla" value="Dificil"><span>Vai ser difícil</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">Como funciona a agenda?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="D17 agenda" value="Papel"><span>Papel</span></label>
+            <label class="opt"><input type="radio" name="D17 agenda" value="Planilha"><span>Planilha</span></label>
+            <label class="opt"><input type="radio" name="D17 agenda" value="Software"><span>Software</span></label>
+          </div>
+          <input type="text" name="D17 qual software" placeholder="se software: qual?" style="margin-top:8px">
+        </div>
+        <div class="f">
+          <label for="d18">O que acontece com quem chama à noite ou no fim de semana?</label>
+          <input type="text" id="d18" name="D18 fora do horario" placeholder="ex.: fica sem resposta até segunda…">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">E</span> Regras e imagem</legend>
+        <div class="f">
+          <label for="e19">Seu CRO e o nome/razão social da clínica</label>
+          <span class="hint">Precisam aparecer em toda peça de publicidade — regra do CFO</span>
+          <input type="text" id="e19" name="E19 cro e razao social" placeholder="CRO-SP 00000 · Clínica…">
+        </div>
+        <div class="f">
+          <span class="lbl">Fotos de antes e depois: você tem autorização por escrito dos pacientes?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="E20 autorizacoes" value="Tenho escritas"><span>Tenho, por escrito</span></label>
+            <label class="opt"><input type="radio" name="E20 autorizacoes" value="Tenho fotos sem autorizacao"><span>Tenho fotos, sem autorização</span></label>
+            <label class="opt"><input type="radio" name="E20 autorizacoes" value="Nao tenho"><span>Não tenho</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">Topa aparecer nos anúncios (rosto, nome, CRO)?</span>
+          <span class="hint">Dentista de verdade converte mais que foto de banco de imagem</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="E21 aparecer" value="Sim"><span>Sim</span></label>
+            <label class="opt"><input type="radio" name="E21 aparecer" value="Talvez"><span>Talvez</span></label>
+            <label class="opt"><input type="radio" name="E21 aparecer" value="Prefiro nao"><span>Prefiro não</span></label>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">Quer divulgar preço ou condição de pagamento nos anúncios?</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="E22 preco" value="Sim"><span>Sim</span></label>
+            <label class="opt"><input type="radio" name="E22 preco" value="Talvez"><span>Talvez</span></label>
+            <label class="opt"><input type="radio" name="E22 preco" value="Nao"><span>Não</span></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="k">F</span> Sucesso</legend>
+        <div class="f">
+          <label for="f23">Pra você, o que é sucesso em 60 dias?</label>
+          <span class="hint">Ex.: "8 pacientes novos por mês" — vira a meta oficial que a gente acompanha</span>
+          <textarea id="f23" name="F23 sucesso 60 dias" placeholder="escreva com suas palavras"></textarea>
+        </div>
+        <div class="f">
+          <label for="obs">Quer deixar alguma pergunta ou recado pro Pedro?</label>
+          <textarea id="obs" name="Recado" placeholder="opcional"></textarea>
+        </div>
+      </fieldset>
+
+    </div>
+
+    <div class="panel" id="panel-p">
+      <fieldset>
+        <legend><span class="k">📎</span> Prints que ajudam muito</legend>
+        <div class="f" style="border-top:0">
+          <span class="hint" style="margin-top:2px">
+            Tire print no celular ou no computador e anexe aqui. Se algum arquivo for
+            grande demais, sem estresse: manda no WhatsApp do Pedro.
+          </span>
+          <label class="drop" id="drop">
+            <strong>Toque para escolher os arquivos</strong>
+            <span>ou arraste e solte aqui · imagens ou PDF · até 10MB no total</span>
+            <input type="file" name="prints" id="prints" multiple accept="image/*,.pdf">
+          </label>
+          <ul class="filelist" id="filelist"></ul>
+          <div class="sizewarn" id="sizewarn">⚠️ Os arquivos passam de 10MB — o envio pode falhar. Tire alguns e mande o resto pelo WhatsApp.</div>
+          <ul class="printtips">
+            <li>Perfil da clínica no <strong>Google Maps</strong> (como aparece pra você)</li>
+            <li>Perfil do <strong>Instagram</strong> da clínica</li>
+            <li><strong>Site</strong>, se tiver</li>
+            <li>Resultados de <strong>anúncios antigos</strong> ou relatório de agência anterior</li>
+            <li>Tela da <strong>agenda/software</strong> que usa hoje</li>
+          </ul>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="submitbar">
+      <button class="send" type="submit" id="send">Enviar pro Pedro →</button>
+      <p class="privacy">As respostas vão direto pro Pedro. Não envie dados de pacientes por aqui.</p>
+      <p class="draftnote" id="draftnote">rascunho salvo automaticamente neste aparelho</p>
+    </div>
+  </form>
+
+</div>
+
+<script>
+(function(){
+  // abas
+  var tq=document.getElementById('tab-q'),tp=document.getElementById('tab-p');
+  var pq=document.getElementById('panel-q'),pp=document.getElementById('panel-p');
+  function tab(which){
+    var q=which==='q';
+    tq.classList.toggle('on',q);tp.classList.toggle('on',!q);
+    tq.setAttribute('aria-selected',q);tp.setAttribute('aria-selected',!q);
+    pq.classList.toggle('on',q);pp.classList.toggle('on',!q);
+    window.scrollTo({top:0});
+  }
+  tq.addEventListener('click',function(){tab('q')});
+  tp.addEventListener('click',function(){tab('p')});
+
+  // rascunho automático
+  var KEY='cussioli-anamnese-draft';
+  var form=document.getElementById('form');
+  var fields=[].slice.call(form.querySelectorAll('input[type=text],textarea,input[type=radio],input[type=checkbox]'))
+    .filter(function(el){return el.name!=='_honey'});
+  function fieldKey(el,idx){return el.name+'|'+el.value+'|'+idx}
+  function save(){
+    var d={};
+    fields.forEach(function(el,i){
+      if(el.type==='radio'||el.type==='checkbox'){d[fieldKey(el,i)]=el.checked}
+      else{d[fieldKey(el,i)]=el.value}
+    });
+    try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}
+  }
+  function restore(){
+    var d;try{d=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){d={}}
+    fields.forEach(function(el,i){
+      var v=d[fieldKey(el,i)];
+      if(v===undefined)return;
+      if(el.type==='radio'||el.type==='checkbox'){el.checked=!!v}
+      else{el.value=v}
+    });
+  }
+  restore();
+  fields.forEach(function(el){
+    el.addEventListener(el.type==='radio'||el.type==='checkbox'?'change':'input',save);
+  });
+
+  // prints
+  var input=document.getElementById('prints');
+  var drop=document.getElementById('drop');
+  var list=document.getElementById('filelist');
+  var warn=document.getElementById('sizewarn');
+  var MAX=10*1024*1024;
+  function fmt(b){return b>1048576?(b/1048576).toFixed(1)+' MB':Math.ceil(b/1024)+' KB'}
+  function render(){
+    list.innerHTML='';
+    var total=0;
+    [].slice.call(input.files).forEach(function(f){
+      total+=f.size;
+      var li=document.createElement('li');
+      var n=document.createElement('span');n.textContent=f.name;
+      var s=document.createElement('span');s.className='sz';s.textContent=fmt(f.size);
+      li.appendChild(n);li.appendChild(s);list.appendChild(li);
+    });
+    warn.classList.toggle('show',total>MAX);
+  }
+  input.addEventListener('change',render);
+  ;['dragover','dragenter'].forEach(function(ev){
+    drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('drag')});
+  });
+  ;['dragleave','drop'].forEach(function(ev){
+    drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('drag')});
+  });
+  drop.addEventListener('drop',function(e){
+    if(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files.length){
+      input.files=e.dataTransfer.files;render();
+    }
+  });
+
+  // envio
+  form.addEventListener('submit',function(){
+    var b=document.getElementById('send');
+    b.disabled=true;b.textContent='Enviando…';
+    try{localStorage.removeItem(KEY)}catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
